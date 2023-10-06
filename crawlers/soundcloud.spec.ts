@@ -45,10 +45,10 @@ for (let i=0;i<200;i++){
     locale: loc,
     timezoneId: tz,
     userAgent: userAgent.toString(),
-    proxy: {
+    /*proxy: {
       server: proxy,
       bypass: 'localhost',
-    },
+    },*/
     ignoreHTTPSErrors: true
   });
 
