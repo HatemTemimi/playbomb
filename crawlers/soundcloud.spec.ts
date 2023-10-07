@@ -32,8 +32,6 @@ const local = [
 
 for (let i=0;i<200;i++){
 
-  console.log(proxies)
-
   //generate random desktop user agent
   const userAgent = new UserAgent({ deviceCategory: 'desktop' });
 
@@ -66,7 +64,8 @@ for (let i=0;i<200;i++){
       timeout: 35000
     });
 
-    //optionally accepts the initial cookie request !fires only if cookie not set
+
+    //optionally accepts the initial cookie request
     /*
      *
     const accept =  page.locator('#onetrust-accept-btn-handler')
