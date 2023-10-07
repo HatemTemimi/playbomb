@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import UserAgent from 'user-agents';
-import proxies from './proxylist';
+//import proxies from './proxylist';
+const proxies = require('../proxy.json')
 
 const timezones = [
   "Europe/Berlin",
@@ -31,6 +32,8 @@ const local = [
 
 for (let i=0;i<200;i++){
 
+  console.log(proxies)
+
   //generate random desktop user agent
   const userAgent = new UserAgent({ deviceCategory: 'desktop' });
 
@@ -45,10 +48,10 @@ for (let i=0;i<200;i++){
     locale: loc,
     timezoneId: tz,
     userAgent: userAgent.toString(),
-    /*proxy: {
+    proxy: {
       server: proxy,
       bypass: 'localhost',
-    },*/
+    },
     ignoreHTTPSErrors: true
   });
 
@@ -63,8 +66,7 @@ for (let i=0;i<200;i++){
       timeout: 35000
     });
 
-
-    //optionally accepts the initial cookie request
+    //optionally accepts the initial cookie request !fires only if cookie not set
     /*
      *
     const accept =  page.locator('#onetrust-accept-btn-handler')
