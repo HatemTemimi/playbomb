@@ -47,7 +47,7 @@ for (let i=0;i<200;i++){
     timezoneId: tz,
     userAgent: userAgent.toString(),
     proxy: {
-      server: proxy,
+      server: 'http://'+proxy,
       bypass: 'localhost',
     },
     ignoreHTTPSErrors: true

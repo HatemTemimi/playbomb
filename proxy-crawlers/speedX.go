@@ -50,7 +50,7 @@ func checkProxy(client *http.Client, withHttp string, allproxies *[]string, wg *
 	}
 }
 
-func main() {
+func GetFromSpeedx() {
 
 	var allproxies []string
 
