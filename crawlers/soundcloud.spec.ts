@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import UserAgent from 'user-agents';
-//import proxies from './proxylist';
-const proxies = require('../proxy.json')
+import proxies from './proxies';
+//const proxies = require('../proxy-crawlers/proxies.json')
 
 const timezones = [
   "Europe/Berlin",
@@ -38,7 +38,7 @@ for (let i=0;i<200;i++){
   //pick random timezoneID / local / proxy
   const tz = timezones[Math.floor(Math.random()*timezones.length)];
   const loc = local[Math.floor(Math.random()*local.length)];
-  const proxy = proxies[Math.floor(Math.random()*proxies.length)];
+  const proxy = "http://"+proxies[Math.floor(Math.random()*proxies.length)];
 
   console.log('using proxy: ', proxy, 'for test: ', i+1 )
 
@@ -47,7 +47,7 @@ for (let i=0;i<200;i++){
     timezoneId: tz,
     userAgent: userAgent.toString(),
     proxy: {
-      server: 'http://'+proxy,
+      server: proxy,
       bypass: 'localhost',
     },
     ignoreHTTPSErrors: true
@@ -59,8 +59,8 @@ for (let i=0;i<200;i++){
 
     //disable web driver to avoid detection
     await context.addInitScript("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-
-    await page.goto('https://soundcloud.com/rxb-flac/break-side-i', {
+  
+    await page.goto('https://soundcloud.com/rxb-flac/untitled-x', {
       timeout: 35000
     });
 
@@ -82,7 +82,7 @@ for (let i=0;i<200;i++){
 
     await expect(play).toBeEnabled({ timeout: 20000 })
 
-    await new Promise(r => setTimeout(r, 5000));
+    await page.waitForTimeout(5000)
 
     console.log('finished play: ', i+1)
 
